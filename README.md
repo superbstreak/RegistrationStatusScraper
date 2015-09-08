@@ -1,5 +1,6 @@
 # RegistrationStatusScraper
-A program aim to automate the boring and time consuming manual multi-page refresh process.
+Tired of clicking the refresh button every new term? This program aims to help reduce the pain...
+When an spot opens up on your desired course, it will automatically opens up the link in the default web browser ready for you.
 
 Feature:
 --
