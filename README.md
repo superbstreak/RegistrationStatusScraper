@@ -2,6 +2,10 @@
 Tired of clicking the refresh button every new term? This program aims to help reduce the pain...
 When an spot opens up on your desired course, it will automatically opens up the link in the default web browser ready for you.
 
+Download: <br />
+--
+JAR: https://github.com/superbstreak/RegistrationStatusScraper/raw/master/Build/classScraper.jar
+
 Feature:
 --
 - Customizable refresh interval (> 3 minutes)
