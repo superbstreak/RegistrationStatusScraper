@@ -25,8 +25,8 @@ public class Main {
           isFirstLine = false;
           String interval = line.trim();
           refresh_interval = Integer.parseInt(interval);
-          if (refresh_interval <= 3) {
-            throw new IllegalArgumentException("Refresh interval must be greater than 3 and an integer.");
+          if (refresh_interval < 2) {
+            throw new IllegalArgumentException("Refresh interval must be greater than or equal to 2 and an integer.");
           }
           System.out.println("Refresh interval set to: "+refresh_interval+" minutes.");
         } 
