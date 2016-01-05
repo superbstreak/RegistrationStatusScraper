@@ -9,46 +9,45 @@ import registrationscraper.controller.ScraperTimerController;
 import registrationscraper.model.AClass;
 import registrationscraper.util.Constants;
 
-public class Main {  
-  
+public class Main {
+
   private static ScraperTimerController timer;
   private static Set<AClass> classesToMonitor = new HashSet<AClass>();
-  
-  public static void main(String [] args){
+
+  public static void main(String[] args) {
     classesToMonitor = new HashSet<AClass>();
     boolean isFirstLine = true;
     int refresh_interval = Constants.REFRESH_INTERVAL;
-    try(BufferedReader br = new BufferedReader(new FileReader("classes.txt"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("classes.txt"))) {
       System.out.println();
-      for(String line; (line = br.readLine()) != null; ) {
+      for (String line; (line = br.readLine()) != null;) {
         if (isFirstLine) {
           isFirstLine = false;
           String interval = line.trim();
           refresh_interval = Integer.parseInt(interval);
-          if (refresh_interval < 2) {
-            throw new IllegalArgumentException("Refresh interval must be greater than or equal to 2 and an integer.");
+          if (refresh_interval < 1) {
+            throw new IllegalArgumentException("Refresh interval must be greater than or equal to 1 and an integer.");
           }
-          System.out.println("Refresh interval set to: "+refresh_interval+" minutes.");
-        } 
-        else {
+          System.out.println("Refresh interval set to: " + refresh_interval + " minutes.");
+        } else {
           String url = line.trim();
           int nameStart = url.indexOf("dept=") + 5;
-          String name = url.substring(nameStart, nameStart+4);
+          String name = url.substring(nameStart, nameStart + 4);
           int courseStart = url.indexOf("course=") + 7;
-          name += " " + url.substring(courseStart, courseStart+3);
+          name += " " + url.substring(courseStart, courseStart + 3);
           int sectionStart = url.indexOf("section=") + 8;
           String section = url.substring(sectionStart, sectionStart + 3);
           classesToMonitor.add(new AClass(name, section, 0, false, url));
-          System.out.println("Monitoring "+name+" "+section+".");
+          System.out.println("Monitoring " + name + " " + section + ".");
         }
       }
       System.out.println();
     } catch (Exception e) {
-      System.err.println("Error while reading: "+e);
+      System.err.println("Error while reading: " + e);
     }
-    
+
     timer = new ScraperTimerController(refresh_interval, classesToMonitor);
     timer.startGlobalTimer();
-    
+
   }
 }
